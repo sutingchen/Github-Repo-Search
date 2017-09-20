@@ -1,0 +1,73 @@
+/*
+Navbar
+ */
+.bg-blue {
+    background-color: #2b669a;
+}
+
+.navbar a {
+    color: whitesmoke;
+}
+
+/*
+Placeholder
+ */
+::-webkit-input-placeholder {
+    font-style: italic;
+}
+:-moz-placeholder {
+    font-style: italic;
+}
+::-moz-placeholder {
+    font-style: italic;
+}
+:-ms-input-placeholder {
+    font-style: italic;
+}
+
+/*
+Section
+ */
+
+.jumbotron {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+/*
+Search bar
+ */
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+/*
+Table
+ */
+th {
+    text-align: center;
+}
+
+.bd-example {
+    padding-top: 2rem;
+}
+
+/*
+Pager
+ */
+@media only screen  and (min-width : 320px) and (max-width : 768px) {
+    .pager {
+        text-align: center;
+    }
+}
+
+@media only screen  and (min-width : 769px) {
+    .pager {
+        text-align: right;
+    }
+}
+
