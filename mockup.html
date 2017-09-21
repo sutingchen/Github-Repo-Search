@@ -24,17 +24,16 @@
 </div>
 
 
-
-<section class="jumbotron text-center">
-    <div class="container">
+<div class="container" id="github-app">
+    <section class="jumbotron text-center">
         <p class="lead text-muted">Search Repositories in Github </p>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-8 col-centered">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search by Repository Name or Owner" aria-label="Search by Repository Name or Owner">
                     <span class="input-group-btn">
-                        <button id="repo-search-button" class="btn btn-secondary" type="button">Search</button>
-                    </span>
+                    <button id="repo-search-button" class="btn btn-primary" type="button">Search</button>
+                </span>
                 </div>
             </div>
         </div>
@@ -84,37 +83,39 @@
                 </ul>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-    Launch demo modal
-</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        Launch demo modal
+    </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<script src="javascripts/vendor/jquery-3.2.1.min.js"></script>
-<script src="javascripts/vendor/bootstrap/bootstrap.min.js"></script>
-<script src="javascripts/app.js"></script>
+
+
 </body>
 </html>
 
+<script src="javascripts/vendor/jquery-3.2.1.min.js"></script>
+<script src="javascripts/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="javascripts/app.js"></script>
