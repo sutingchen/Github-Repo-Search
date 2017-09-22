@@ -147,3 +147,18 @@ Card
 .card-inner {
     padding-left: 0;
 }
+
+/*
+Button
+ */
+.btn-outline-primary {
+    color: #0275d8;
+    background-image: none;
+    background-color: transparent;
+    border-color: #0275d8;
+    width: 100px;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary.focus {
+    color: #0275d8;
+}
