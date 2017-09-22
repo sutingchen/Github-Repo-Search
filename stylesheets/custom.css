@@ -56,6 +56,14 @@ th {
     padding-top: 2rem;
 }
 
+[data-hidden="hidden"] {
+    visibility: hidden;
+}
+
+[data-hidden="false"]{
+    visibility: visible;
+}
+
 /*
 Pager
  */

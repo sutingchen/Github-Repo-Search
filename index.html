@@ -10,9 +10,6 @@
     <link rel='stylesheet' href='stylesheets/bootstrap.css' />
     <link rel='stylesheet' href='stylesheets/bootstrap-theme.css' />
     <link rel='stylesheet' href='stylesheets/custom.css' />
-
-
-
 </head>
 <body>
 <div class="navbar navbar-fixed-top bg-blue" role="navigation">
@@ -32,7 +29,7 @@
 
 <script type="text/x-handlebars">
     <section class="jumbotron text-center">
-            {{outlet}}
+        {{outlet}}
     </section>
 </script>
 
@@ -54,24 +51,24 @@
 
         <div class="row">
             <div class="bd-example" data-example-id="">
-                <table class="table table-striped">
+                <table class="table table-striped" id="result-table">
                     <thead>
                     <tr>
                         <th></th>
                         <th></th>
-                        <th><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></th>
+                        <th><span id="watcher-icon" class="glyphicon glyphicon-eye-open" aria-hidden="true" data-hidden="hidden"></span></th>
                     </tr>
                     </thead>
                     <tbody>
                         {{#each}}
                             <tr>
-                                <th scope="row">{{index_number}}</th>
+                                <th scope="row">{{row_number}}</th>
                                 <td>{{full_name}}</td>
                                 <td>{{watchers}}</td>
                             </tr>
                         {{else}}
                             <tr>
-                                <td colspan="3"><i>No repositories...</i></td>
+                                <td colspan="3"><i id="error-message">No result found...</i></td>
                             </tr>
                         {{/each}}
                     </tbody>
@@ -92,7 +89,6 @@
 <script src="javascripts/vendor/bootstrap/bootstrap.min.js"></script>
 <script src="javascripts/vendor/ember/handlebars-1.1.2.js"></script>
 <script src="javascripts/vendor/ember/ember-1.4.0.js"></script>
-<script src="javascripts/vendor/helper.js"></script>
 <script src="javascripts/vendor/moment/moment.js"></script>
 <script src="javascripts/vendor/lodash/lodash.js"></script>
 <script>
@@ -115,16 +111,42 @@
             var pageNumber = self.pageNumber;
 
             if(q && q.length > 0){
-                Ember.$.getJSON("https://api.github.com/search/repositories", {q: q, page: pageNumber , per_page: 5}, function(data){
-                    var results = data.items;
-                    for(var i = 0 ; i < results.length ; i++ ) {
-                        results[i] = _.merge({}, results[i], {index_number: 5 *(pageNumber-1) + (i+1)});
-                    }
-                    self.set("model", results);
-                })
+                this.clearTable();
+                Ember.$.getJSON("https://api.github.com/search/repositories", {q: q, page: pageNumber , per_page: 5})
+                        .done(function(data){
+                            var results = data.items;
+                            for(var i = 0 ; i < results.length ; i++ ) {
+                                results[i] = _.merge({}, results[i], {row_number: 5 *(pageNumber-1) + (i+1)});
+                            }
+                            self.set("model", results);
+
+                            var $watcher_icon = $("#watcher-icon");
+                            results.length > 0 ? $watcher_icon.attr('data-hidden', 'false') : $watcher_icon.attr('data-hidden', 'hidden');
+
+                        })
+                        .fail(function(error){
+                            if(error.status === 403){
+                                console.dir(error);
+                                alert("API rate limit exceeded. Please try it later.");
+                                self.set("model", null);
+                            } else{
+                                console.dir(error);
+                                self.set("model", null);
+                            }
+                        })
+            } else {
+                this.clearTable();
+                this.displayEmptyErrorMessage();
             }
         },
-        title: function () {
+        clearTable: function(){
+            $("#result-table > tbody > tr").remove();
+            $("#watcher-icon").attr('data-hidden', 'hidden');
+        },
+        displayEmptyErrorMessage: function(){
+            $("#result-table > tbody").append('<tr><td colspan="3"><i id="error-message">Enter a keyword...</i></td><tr>');
+        },
+        title: function() {
             var q = this.get("searchTerm");
             if (q) {
                 return "Searching for " + q;
@@ -137,7 +159,6 @@
                 this.loadRepositories();
             },
             prev: function(){
-
                 if(this.pageNumber > 1){
                     this.pageNumber--;
                     this.loadRepositories()
@@ -155,4 +176,13 @@
         this.resource("repository", { path: "repositories/:full_name"});
     });
 
+</script>
+
+<script>
+
+    // jQuery custom script
+
+    $(document).ready(function(){
+        $('#error-message').html('Enter a keyword...');
+    })
 </script>
