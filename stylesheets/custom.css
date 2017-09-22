@@ -39,6 +39,12 @@ Section
     background-color: #fff;
 }
 
+.jumbotron > p {
+    margin-bottom: 15px;
+    font-size: 21px;
+    font-weight: 200;
+}
+
 /*
 Search bar
  */
@@ -67,6 +73,10 @@ th {
     visibility: visible;
 }
 
+.table > tbody > tr > td:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
 /*
 Pager
  */
@@ -82,3 +92,58 @@ Pager
     }
 }
 
+/*
+column
+ */
+.column {
+    margin-bottom: 3rem;
+}
+
+/*
+Card
+ */
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .75rem;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 2rem;
+}
+
+.card-title {
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+}
+
+.card-subtitle {
+    margin-top: -.375rem;
+}
+
+.card-link+.card-link {
+    margin-left: 1.25rem;
+}
+
+.card-text {
+    font-size: 17px;
+    margin: 0 0 30px;
+}
+
+.card-inner {
+    padding-left: 0;
+}
