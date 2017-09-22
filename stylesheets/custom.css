@@ -1,3 +1,7 @@
+body {
+    padding-top: 50px; /*To keep container not to overlap with navbar*/
+}
+
 /*
 Navbar
  */
@@ -30,8 +34,7 @@ Section
  */
 
 .jumbotron {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+    padding-top: 6rem;
     margin-bottom: 0;
     background-color: #fff;
 }
