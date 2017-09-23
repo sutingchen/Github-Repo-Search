@@ -5,13 +5,10 @@ window.Github = Ember.Application.create({
 
 Github.Router.map(function(){
 
-    this.resource("repository2", { path: "/repositories/:a/:b" }, function () {
-        this.resource("watchers");
+    this.resource("repository", { path: "/repositories/:owner.login/:name" }, function () {
+        this.resource("followers");
     });
 
-    this.resource("repository", { path: "/repositories/:full_name" }, function () {
-        this.resource("watchers");
-    });
 });
 
 
@@ -24,20 +21,18 @@ Github.IndexRoute = Ember.Route.extend({
 
 Github.RepositoryRoute = Ember.Route.extend({
     model: function (params) {
-        return Ember.$.getJSON("https://api.github.com/repos/" + params.full_name);
+        return Ember.$.getJSON("https://api.github.com/repos/" + params["owner.login"] + "/" + params["name"]);
     }
 });
 
 
-Github.Repository2Route = Ember.Route.extend({
-    model: function (params) {
-        return Ember.$.getJSON("https://api.github.com/repos/" + params.a + "/" + params.b);
-    }
-});
 
-Github.WatchersRoute = Ember.Route.extend({
+Github.FollowersRoute = Ember.Route.extend({
     model: function () {
-        var repository = this.modelFor("repository");
+        // var repository = this.modelFor("repo");
+        // if(typeof repository === 'undefined'){
+            repository = this.modelFor("repository");
+        // }
         return Ember.$.getJSON(repository.subscribers_url);
     },
     setupController: function(controller, model){
