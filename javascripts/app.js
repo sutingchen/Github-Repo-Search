@@ -26,13 +26,9 @@ Github.RepositoryRoute = Ember.Route.extend({
 });
 
 
-
 Github.FollowersRoute = Ember.Route.extend({
     model: function () {
-        // var repository = this.modelFor("repo");
-        // if(typeof repository === 'undefined'){
-            repository = this.modelFor("repository");
-        // }
+        repository = this.modelFor("repository");
         return Ember.$.getJSON(repository.subscribers_url);
     },
     setupController: function(controller, model){
