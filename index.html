@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Github Repo Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
     <link rel='stylesheet' href='stylesheets/bootstrap.css' />
     <link rel='stylesheet' href='stylesheets/bootstrap-theme.css' />
     <link rel='stylesheet' href='stylesheets/custom.css' />
@@ -20,66 +22,154 @@
         </div>
     </div>
 
-    <div class="container" id="github-app"></div>
+    <div class="container-fluid" id="github-app"></div>
 </body>
 </html>
 
 
 <script type="text/x-handlebars">
-    <section class="jumbotron text-center">
         {{outlet}}
-    </section>
 </script>
 
 <script type="text/x-handlebars" id="index">
-    <form class="form-inline" {{action "searchForRepository" on="submit"}}>
-        <p class="lead text-muted">Search Repositories in Github </p>
-        <div class="row">
+    <section class="jumbotron text-center">
+        <form class="form-inline" {{action "searchForRepository" on="submit"}}>
+            <p class="lead text-muted">Search Repositories in Github </p>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-8 col-centered">
+                    <div class="input-group">
+                        {{input value=searchTerm class="form-control"  placeholder="e.g. 'jquery-validation'"}}
+                        <span class="input-group-btn">
+                            <button id="repo-search-button" class="btn btn-primary" type="submit">Search</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- The hidden field -->
+            <input type="hidden" name="page" value="1"/>
             <div class="col-sm-12 col-md-12 col-lg-8 col-centered">
-                <div class="input-group">
-                    {{input value=searchTerm class="form-control"  placeholder="e.g. 'jquery-validation'"}}
-                    <span class="input-group-btn">
-                        <button id="repo-search-button" class="btn btn-primary" type="submit">Search</button>
-                    </span>
+                <div class="row">
+                    <div class="bd-example" data-example-id="">
+                        <table class="table table-striped" id="result-table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th><span id="watcher-icon" class="glyphicon glyphicon-eye-open" aria-hidden="true" data-hidden="hidden"></span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {{#each}}
+                                    <tr>
+                                        <th scope="row">{{row_number}}</th>
+                                        <td>{{#link-to 'repository' this.full_name}}{{full_name}}{{/link-to}}</td>
+                                        <td>{{watchers}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td colspan="3"><i id="error-message">No result found...</i></td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bd-example">
+                        <ul class="pager">
+                            <li><a href="#" {{action 'prev'}}>&larr; Previous</a></li>
+                            <li><a href="#" {{action 'next'}}>Next &rarr;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</script>
+
+<script type="text/x-handlebars" id="repository">
+    <section class="jumbotron">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 column">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-subtitle mb-2 text-muted">{{owner.login}}/</h4>
+                        <h2 class="card-title">{{name}}</h2>
+
+                        <p class="card-text">{{description}}</p>
+                        <div class="col-md-12 col-lg-12 column card-inner">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <td><b>Language</b></td>
+                                    <td>{{language}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Watchers </b></td>
+                                    <td>{{watchers_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Stargazers </b></td>
+                                    <td>{{stargazers_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Forks </b></td>
+                                    <td>{{forks_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a {{bind-attr href=html_url}} class="card-link" target=_blank>{{html_url}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            {{#link-to 'index' tagName='button' class='btn btn-outline-primary'}} Back {{/link-to}}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 column">
+                <div class="card">
+                    <div class="card-block">
+                        <h3 class="card-title">Subscribers</h3>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <td><b>Language</b></td>
+                                    <td>{{language}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Watchers </b></td>
+                                    <td>{{watchers_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Stargazers </b></td>
+                                    <td>{{stargazers_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Forks </b></td>
+                                    <td>{{forks_count}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a {{bind-attr href=html_url}} class="card-link" target=_blank>{{html_url}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            {{#link-to 'index' tagName='button' class='btn btn-outline-primary'}} Back {{/link-to}}
+
+
+
+
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- The hidden field -->
-        <input type="hidden" name="page" value="1"/>
-
-        <div class="row">
-            <div class="bd-example" data-example-id="">
-                <table class="table table-striped" id="result-table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th><span id="watcher-icon" class="glyphicon glyphicon-eye-open" aria-hidden="true" data-hidden="hidden"></span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {{#each}}
-                            <tr>
-                                <th scope="row">{{row_number}}</th>
-                                <td>{{full_name}}</td>
-                                <td>{{watchers}}</td>
-                            </tr>
-                        {{else}}
-                            <tr>
-                                <td colspan="3"><i id="error-message">No result found...</i></td>
-                            </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-            <div class="bd-example">
-                <ul class="pager">
-                    <li><a href="#" {{action 'prev'}}>&larr; Previous</a></li>
-                    <li><a href="#" {{action 'next'}}>Next &rarr;</a></li>
-                </ul>
-            </div>
-        </div>
-    </form>
+    </section>
 </script>
 
 

@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Github Repo Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
     <link rel='stylesheet' href='stylesheets/bootstrap.css' />
     <link rel='stylesheet' href='stylesheets/bootstrap-theme.css' />
     <link rel='stylesheet' href='stylesheets/custom.css' />
@@ -21,69 +23,131 @@
 </div>
 
 
-<div class="container" id="github-app">
+<div class="container-fluid" id="github-app">
     <section class="jumbotron">
         <div class="row">
-            <div class="col-md-8 col-lg-8 column">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 column">
                 <div class="card">
                     <div class="card-block">
-                        <h4 class="card-subtitle mb-2 text-muted">emberjs</h4>
-                        <h2 class="card-title">ember.js</h2>
 
-                        <p class="card-text">Ember.js - A JavaScript framework for creating ambitious web applications</p>
-                        <div class="col-md-8 col-lg-8 column card-inner">
-                            <table class="table table-striped">
-                                <tbody>
-                                <tr>
-                                    <td><b>Language:</b></td>
-                                    <td>JavaScript</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Watchers: </b></td>
-                                    <td>1,046</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Star: </b></td>
-                                    <td>18,266</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Fork: </b></td>
-                                    <td>3,756</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a href="https://github.com/emberjs/ember.js" class="card-link">https://github.com/emberjs/ember.js</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="row">
+
+                            <h2 class="card-title">ember.js</h2>
+                            <p class="card-text">Ember.js - A JavaScript framework for creating ambitious web applications</p>
                             <button type="button" class="btn btn-outline-primary">Back</button>
+                        </div>
+
+
+
+                            <!--<div class="row button-row">-->
+                                <!--<button type="button" class="btn btn-outline-primary">Back</button>-->
+                            <!--</div>-->
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 column card-inner">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Language</b></td>
+                                            <td>JavaScript</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Watchers</b></td>
+                                            <td>1,046</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Stargazers</b></td>
+                                            <td>18,266</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Forks</b></td>
+                                            <td>3,756</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Clone URL</b></td>
+                                            <td><a href="https://github.com/emberjs/ember.js.git" class="card-link">https://github.com/emberjs/ember.js.git</a></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Link</b></td>
+                                            <td>
+                                                <a href="https://github.com/emberjs/ember.js" class="card-link">https://github.com/emberjs/ember.js</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4 column">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 column">
                 <div class="card">
                     <div class="card-block">
-                        <h3 class="card-title">Subscribers</h3>
-                        <div class="bd-example">
-                            <ul>
-                                <li>pop000ooo</li>
-                                <li>blue5tar</li>
-                                <li>lichuhui</li>
-                                <li>davidsun</li>
-                                <li>kozog</li>
-                                <li>antimatterful</li>
-                                <li>seven1240</li>
-                                <li>buzenko</li>
-                                <li>Neaton</li>
-                                <li>NathanThiya</li>
-                            </ul>
+                        <h3 class="card-title">Summary</h3>
+                        <div class="row placeholders">
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 placeholder">
+                                <span class="octicon octicon-git-branch mega-octicon"></span>
+                                <h4>56</h4>
+                                <span class="text-muted">branches</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 placeholder">
+                                <span class="octicon octicon-history mega-octicon"></span>
+                                <h4>14915</h4>
+                                <span class="text-muted">commits</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 placeholder">
+                                <span class="octicon octicon-organization mega-octicon"></span>
+                                <h4>680</h4>
+                                <span class="text-muted">contributors</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 placeholder">
+                                <span class="octicon octicon-tag mega-octicon"></span>
+                                <h4>259</h4>
+                                <span class="text-muted">releases</span>
+                            </div>
                         </div>
-
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-block">
+                        <h3 class="card-title">Owner</h3>
+                        <div class="row placeholders vertical-align">
+
+
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <p class="text-center">
+                                    <img src="https://avatars2.githubusercontent.com/u/1253363?v=4" class="img-fluid img-thumbnail rounded">
+                                </p>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                <h4 class="card-subtitle mb-2 text-muted">emberjs</h4>
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><b>Type</b></td>
+                                        <td>Organization</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>More Info</b>
+                                        </td>
+                                        <td>
+                                            <a href="https://github.com/emberjs">https://github.com/emberjs</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </section>

@@ -73,9 +73,11 @@ th {
     visibility: visible;
 }
 
-.table > tbody > tr > td:last-child {
+.table > tbody > tr:last-child {
     border-bottom: 1px solid #ddd;
 }
+
+
 
 /*
 Pager
@@ -84,24 +86,44 @@ Pager
     .pager {
         text-align: center;
     }
+
+    .summary {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
 
 @media only screen  and (min-width : 769px) {
     .pager {
         text-align: right;
     }
+    .summary {
+        padding-left: 8rem;
+        padding-right: 8rem;
+    }
 }
 
 /*
 column
  */
-.column {
+/*.column {*/
+    /*margin-bottom: 3rem;*/
+/*}*/
+
+/*
+Container
+ */
+.row {
+    margin-left: 25px;
+    margin-right: 25px;
     margin-bottom: 3rem;
 }
 
-/*
-Card
- */
+.button-row {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
 .card {
     position: relative;
     display: -webkit-box;
@@ -116,6 +138,7 @@ Card
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .75rem;
+    margin-bottom: 3rem;
 }
 
 .card-block {
@@ -126,9 +149,14 @@ Card
     padding: 2rem;
 }
 
-.card-title {
+h2.card-title {
     margin-top: .75rem;
-    margin-bottom: .75rem;
+    margin-bottom: 3rem;
+}
+
+h3.card-title {
+    margin-top: .75rem;
+    margin-bottom: 3rem;
 }
 
 .card-subtitle {
@@ -141,11 +169,20 @@ Card
 
 .card-text {
     font-size: 17px;
-    margin: 0 0 30px;
+    margin: 0 0 2rem;
 }
 
 .card-inner {
     padding-left: 0;
+}
+
+.summary {
+    padding-top: 1rem;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
 }
 
 /*
@@ -161,4 +198,40 @@ Button
 
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary.focus {
     color: #0275d8;
+}
+
+/*
+Dashboard
+ */
+.main {
+    padding: 20px;
+}
+
+.placeholders {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.placeholders h4 {
+    margin-bottom: 0;
+}
+
+/*
+octicon
+ */
+
+.mega-octicon {
+    font-size: 30px;
+}
+
+/*
+image
+ */
+.img-thumbnail {
+    max-width: 200px;
 }

@@ -2,6 +2,17 @@ window.Github = Ember.Application.create({
     rootElement: "#github-app"
 });
 
+
+Github.Router.map(function(){
+    // this.resource("repositories");
+    // this.resource("repository", { path: "repositories/:full_name"});
+
+    this.resource("repository", { path: "repositories/:full_name" }, function () {
+        this.resource("followers");
+    });
+});
+
+
 Github.IndexRoute = Ember.Route.extend({
     setupController: function (controller, model) {
         controller.loadRepositories();
@@ -77,14 +88,16 @@ Github.IndexController = Ember.ArrayController.extend({
     }
 });
 
-Github.Router.map(function(){
-    this.resource("repositories");
-    this.resource("repository", { path: "repositories/:full_name"});
+Github.RepositoryRoute = Ember.Route.extend({
+    model: function (params) {
+        return Ember.$.getJSON("https://api.github.com/repos/" + params.full_name);
+    }
 });
+
 
 
 // jQuery custom script
 
 $(document).ready(function(){
     $('#error-message').html('Enter a keyword...');
-})
+});
