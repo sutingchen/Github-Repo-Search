@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Github Repo Search</title>
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
     <link rel='stylesheet' href='stylesheets/bootstrap.css' />
     <link rel='stylesheet' href='stylesheets/bootstrap-theme.css' />
@@ -106,15 +105,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Watchers</b></td>
-                                        <td>{{#link-to 'watchers'}}{{watchers_count}}{{/link-to}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Stargazers</b></td>
-                                        <td>{{stargazers_count}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Forks</b></td>
-                                        <td>{{forks_count}}</td>
+                                        <td>{{#link-to 'watchers' class='modal-opener'}}{{watchers_count}}{{/link-to}}</td>
                                     </tr>
                                     <tr class="hidden-xs">
                                         <td><b>Clone URL</b></td>
@@ -130,8 +121,7 @@
                                     <tr class="hidden-xs">
                                         <td><b>More Info</b></td>
                                         <td>
-                                            <!--<a href="https://github.com/emberjs/ember.js" class="card-link">https://github.com/emberjs/ember.js</a>-->
-                                            <a {{bind-attr href=html_url}} class="card-link" target=_blank>{{html_url}}</a>
+                                            <a id="repo-address" {{bind-attr href=html_url}} class="card-link" target=_blank>{{html_url}}</a>
                                         </td>
                                     </tr>
 
@@ -145,28 +135,6 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 column">
-                <!--<div class="card">-->
-                    <!--<div class="card-block">-->
-                        <!--<h3 class="card-title">Summary</h3>-->
-                        <!--<div class="row placeholders">-->
-                            <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 placeholder">-->
-                                <!--<span class="octicon octicon-git-branch mega-octicon"></span>-->
-                                <!--<h4 id="branch-count"></h4>-->
-                                <!--<span class="text-muted">branches</span>-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 placeholder">-->
-                                <!--<span class="octicon octicon-organization mega-octicon"></span>-->
-                                <!--<h4 id="contributor-count"></h4>-->
-                                <!--<span class="text-muted">contributors</span>-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 placeholder">-->
-                                <!--<span class="octicon octicon-tag mega-octicon"></span>-->
-                                <!--<h4 id="release-count"></h4>-->
-                                <!--<span class="text-muted">releases</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="card">
                     <div class="card-block">
                         <h3 class="card-title">Owner</h3>
@@ -210,17 +178,128 @@
     </section>
 </script>
 
+
+<script type="text/x-handlebars" id="repository2">
+    <section class="jumbotron">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 column">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="row">
+                            <h2 class="card-title">{{name}}</h2>
+                            <p class="card-text">{{description}}</p>
+                            {{#link-to 'index' tagName='button' class='btn btn-outline-primary'}} Back {{/link-to}}
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 column card-inner">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td><b>Language</b></td>
+                                        <td>{{language}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Watchers</b></td>
+                                        <td>{{#link-to 'watchers' class='modal-opener'}}{{watchers_count}}{{/link-to}}</td>
+                                    </tr>
+                                    <tr class="hidden-xs">
+                                        <td><b>Clone URL</b></td>
+                                        <td>
+                                            <button class="btn btn-clipboard btn-primary" {{bind-attr data-clipboard-text=clone_url}}>
+                                                Copy to clipboard
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hidden-sm hidden-md hidden-lg">
+                                        <td colspan="2" class="td-more-info"><a {{bind-attr href=html_url}} class="card-link" target=_blank> More Info</a></td>
+                                    </tr>
+                                    <tr class="hidden-xs">
+                                        <td><b>More Info</b></td>
+                                        <td>
+                                            <a id="repo-address" {{bind-attr href=html_url}} class="card-link" target=_blank>{{html_url}}</a>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {{outlet}}
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 column">
+                <div class="card">
+                    <div class="card-block">
+                        <h3 class="card-title">Owner</h3>
+                        <div class="row placeholders vertical-align">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <p class="text-center">
+                                    <!--<img src="https://avatars2.githubusercontent.com/u/1253363?v=4" class="img-fluid img-thumbnail rounded">-->
+                                    <img {{bind-attr src=owner.avatar_url}} class="img-fluid img-thumbnail rounded" />
+                                </p>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 ">
+                                <h4 class="card-subtitle text-muted">{{owner.login}}</h4>
+                                <table class="table owner-table">
+                                    <tbody>
+                                    <tr>
+                                        <td><b>Type</b></td>
+                                        <td>{{owner.type}}</td>
+                                    </tr>
+                                    <tr class="hidden-sm hidden-md hidden-lg">
+                                        <td colspan="2">
+                                            <a {{bind-attr href=owner.html_url}} target=_blank>More Info</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="hidden-xs hidden-print">
+                                        <td>
+                                            <b>More Info</b>
+                                        </td>
+                                        <td>
+                                            <a {{bind-attr href=owner.html_url}} target=_blank>{{owner.html_url}}</a>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</script>
+
 <script type="text/x-handlebars" id="watchers">
-    <div class="row">
-        <div class="bd-example">
-            <h3>Watchers</h3>
-            <ul>
-                {{#each}}
-                        <li>{{login}}</li>
-                {{/each}}
-            </ul>
+    <div class="modal fade" id="watchers-modal" tabindex="-1" role="dialog" aria-labelledby="Watchers" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Watchers</h2>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="bd-example">
+                            <ul>
+                                {{#each}}
+                                    <li>{{login}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <a id="view-all-watchers" class="card-link" target=_blank>View all</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </script>
 
 

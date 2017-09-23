@@ -4,10 +4,12 @@ window.Github = Ember.Application.create({
 
 
 Github.Router.map(function(){
-    // this.resource("repositories");
-    // this.resource("repository", { path: "repositories/:full_name"});
 
-    this.resource("repository", { path: "repositories/:full_name" }, function () {
+    this.resource("repository2", { path: "/repositories/:a/:b" }, function () {
+        this.resource("watchers");
+    });
+
+    this.resource("repository", { path: "/repositories/:full_name" }, function () {
         this.resource("watchers");
     });
 });
@@ -20,26 +22,46 @@ Github.IndexRoute = Ember.Route.extend({
 });
 
 
-
 Github.RepositoryRoute = Ember.Route.extend({
     model: function (params) {
         return Ember.$.getJSON("https://api.github.com/repos/" + params.full_name);
     }
-    // setupController: function(controller, model){
-    //     this._super(controller, model);
-    //
-    //     Ember.run.scheduleOnce('afterRender', function(){
-    //         Util.ShowAggregatedStats(model);
-    //     });
-    //
-    //
-    // }
+});
+
+
+Github.Repository2Route = Ember.Route.extend({
+    model: function (params) {
+        return Ember.$.getJSON("https://api.github.com/repos/" + params.a + "/" + params.b);
+    }
 });
 
 Github.WatchersRoute = Ember.Route.extend({
     model: function () {
         var repository = this.modelFor("repository");
-        return Ember.$.getJSON(repository.subscribers_url, {page: 1, per_page: 10});
+        return Ember.$.getJSON(repository.subscribers_url);
+    },
+    setupController: function(controller, model){
+
+        // I know this is whack...
+
+        this._super(controller, model);
+
+        Ember.run.scheduleOnce('afterRender', function(){
+
+            console.log(model.length);
+
+            $('#watchers-modal').modal('show');
+            var address = $('#repo-address').attr('href');
+            $("#view-all-watchers").attr('href', address + '/watchers');
+
+            $('.modal-opener').on('click',function(){
+
+                $('#watchers-modal').modal('show');
+            })
+
+        });
+
+
     }
 });
 
@@ -114,15 +136,6 @@ Github.IndexController = Ember.ArrayController.extend({
 });
 
 
-var Util = Util || {};
-
-
-
-Util.ShowAggregatedStats = function(model){
-    Util.GetContributorsCount(model);
-    Util.GetReleasesCount(model);
-    Util.GetBranchesCount(model);
-};
 
 
 // jQuery custom script
@@ -172,46 +185,4 @@ $(document).ready(function(){
 
 });
 
-// Util.GetContributorsCount = function(model){
-//
-//     var url = model.contributors_url;
-//     $.ajax({
-//         type: "GET",
-//         url: url,
-//     }).done(function (result){
-//         console.log(result.length)
-//         $("#contributor-count").html(result.length);
-//     }).fail(function(err){
-//         console.dir(err);
-//     });
-// };
-//
-// Util.GetReleasesCount = function(model){
-//
-//     var url = model.releases_url;
-//
-//     $.ajax({
-//         type: "GET",
-//         url: url.replace("{/id}", ""),
-//     }).done(function (result){
-//         console.log(result.length)
-//         $("#release-count").html(result.length);
-//     }).fail(function(err){
-//         console.dir(err);
-//     });
-// };
-//
-// Util.GetBranchesCount = function(model){
-//
-//     var url = model.branches_url;
-//
-//     $.ajax({
-//         type: "GET",
-//         url: url.replace("{/branch}", "")
-//     }).done(function (result){
-//         console.log(result.length);
-//         $("#branch-count").html(result.length);
-//     }).fail(function(err){
-//         console.dir(err);
-//     });
-// };
+
