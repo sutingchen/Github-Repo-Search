@@ -4,11 +4,9 @@ window.Github = Ember.Application.create({
 
 
 Github.Router.map(function(){
-
     this.resource("repository", { path: "/repositories/:owner.login/:name" }, function () {
         this.resource("followers");
     });
-
 });
 
 
@@ -51,8 +49,6 @@ Github.FollowersRoute = Ember.Route.extend({
             })
 
         });
-
-
     }
 });
 
