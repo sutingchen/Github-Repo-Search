@@ -25,6 +25,15 @@ Github.RepositoryRoute = Ember.Route.extend({
     model: function (params) {
         return Ember.$.getJSON("https://api.github.com/repos/" + params.full_name);
     }
+    // setupController: function(controller, model){
+    //     this._super(controller, model);
+    //
+    //     Ember.run.scheduleOnce('afterRender', function(){
+    //         Util.ShowAggregatedStats(model);
+    //     });
+    //
+    //
+    // }
 });
 
 Github.WatchersRoute = Ember.Route.extend({
@@ -33,6 +42,7 @@ Github.WatchersRoute = Ember.Route.extend({
         return Ember.$.getJSON(repository.subscribers_url, {page: 1, per_page: 10});
     }
 });
+
 
 Github.IndexController = Ember.ArrayController.extend({
     loadRepositories: function(){
@@ -103,10 +113,16 @@ Github.IndexController = Ember.ArrayController.extend({
     }
 });
 
-// Github.WatchersController = Ember.ArrayController.extend({
-//     needs: ["repository"],
-//     repository : Ember.computed.alias("controllers.repository")
-// });
+
+var Util = Util || {};
+
+
+
+Util.ShowAggregatedStats = function(model){
+    Util.GetContributorsCount(model);
+    Util.GetReleasesCount(model);
+    Util.GetBranchesCount(model);
+};
 
 
 // jQuery custom script
@@ -148,4 +164,54 @@ $(document).ready(function(){
         setTooltip(e.trigger, 'Failed!');
         hideTooltip(e.trigger);
     });
+
+    $('input[type=hidden]').change(function(){
+        "use strict";
+        alert('changed');
+    })
+
 });
+
+// Util.GetContributorsCount = function(model){
+//
+//     var url = model.contributors_url;
+//     $.ajax({
+//         type: "GET",
+//         url: url,
+//     }).done(function (result){
+//         console.log(result.length)
+//         $("#contributor-count").html(result.length);
+//     }).fail(function(err){
+//         console.dir(err);
+//     });
+// };
+//
+// Util.GetReleasesCount = function(model){
+//
+//     var url = model.releases_url;
+//
+//     $.ajax({
+//         type: "GET",
+//         url: url.replace("{/id}", ""),
+//     }).done(function (result){
+//         console.log(result.length)
+//         $("#release-count").html(result.length);
+//     }).fail(function(err){
+//         console.dir(err);
+//     });
+// };
+//
+// Util.GetBranchesCount = function(model){
+//
+//     var url = model.branches_url;
+//
+//     $.ajax({
+//         type: "GET",
+//         url: url.replace("{/branch}", "")
+//     }).done(function (result){
+//         console.log(result.length);
+//         $("#branch-count").html(result.length);
+//     }).fail(function(err){
+//         console.dir(err);
+//     });
+// };
