@@ -8,7 +8,7 @@ Github.Router.map(function(){
     // this.resource("repository", { path: "repositories/:full_name"});
 
     this.resource("repository", { path: "repositories/:full_name" }, function () {
-        this.resource("followers");
+        this.resource("watchers");
     });
 });
 
@@ -16,6 +16,21 @@ Github.Router.map(function(){
 Github.IndexRoute = Ember.Route.extend({
     setupController: function (controller, model) {
         controller.loadRepositories();
+    }
+});
+
+
+
+Github.RepositoryRoute = Ember.Route.extend({
+    model: function (params) {
+        return Ember.$.getJSON("https://api.github.com/repos/" + params.full_name);
+    }
+});
+
+Github.WatchersRoute = Ember.Route.extend({
+    model: function () {
+        var repository = this.modelFor("repository");
+        return Ember.$.getJSON(repository.subscribers_url, {page: 1, per_page: 10});
     }
 });
 
@@ -88,16 +103,49 @@ Github.IndexController = Ember.ArrayController.extend({
     }
 });
 
-Github.RepositoryRoute = Ember.Route.extend({
-    model: function (params) {
-        return Ember.$.getJSON("https://api.github.com/repos/" + params.full_name);
-    }
-});
-
+// Github.WatchersController = Ember.ArrayController.extend({
+//     needs: ["repository"],
+//     repository : Ember.computed.alias("controllers.repository")
+// });
 
 
 // jQuery custom script
 
 $(document).ready(function(){
+
     $('#error-message').html('Enter a keyword...');
+
+
+    // Tooltip
+
+    $('button.btn-clipboard').tooltip({
+        trigger: 'click',
+        placement: 'bottom'
+    });
+
+    function setTooltip(btn, message) {
+        $(btn).tooltip('hide')
+            .attr('data-original-title', message)
+            .tooltip('show');
+    }
+
+    function hideTooltip(btn) {
+        setTimeout(function() {
+            $(btn).tooltip('hide');
+        }, 1000);
+    }
+
+    // Clipboard
+
+    var clipboard = new Clipboard('button.btn-clipboard');
+
+    clipboard.on('success', function(e) {
+        setTooltip(e.trigger, 'Copied!');
+        hideTooltip(e.trigger);
+    });
+
+    clipboard.on('error', function(e) {
+        setTooltip(e.trigger, 'Failed!');
+        hideTooltip(e.trigger);
+    });
 });

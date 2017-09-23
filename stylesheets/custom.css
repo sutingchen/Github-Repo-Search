@@ -1,5 +1,121 @@
+/*
+Container
+ */
+
 body {
     padding-top: 50px; /*To keep container not to overlap with navbar*/
+}
+
+@media only screen  and (max-width : 480px) {
+    .bd-example {
+        padding-top: 0;
+    }
+}
+
+
+.row {
+    margin-bottom: 3rem;
+}
+
+@media only screen  and (min-width : 480px){
+    .row {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+
+.button-row {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .75rem;
+    margin-bottom: 3rem;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 2rem;
+}
+
+h2.card-title {
+    margin-top: .75rem;
+    margin-bottom: 3rem;
+}
+
+h3.card-title {
+    margin-top: .75rem;
+    margin-bottom: 3rem;
+}
+
+.card-subtitle {
+    margin-top: -.375rem;
+}
+
+.card-link+.card-link {
+    margin-left: 1.25rem;
+}
+
+.card-text {
+    font-size: 17px;
+    margin: 0 0 2rem;
+}
+
+.card-inner {
+    padding-left: 0;
+}
+
+.summary {
+    padding-top: 1rem;
+}
+
+
+@media only screen  and (min-width : 1600px) {
+    .vertical-align {
+        display: flex;
+        align-items: center;
+    }
+
+    .vertical-align table {
+        margin-top: 1rem;
+    }
+}
+
+@media only screen  and (max-width : 480px){
+    section.jumbotron {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .column {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media only screen  and (max-width : 750px){
+    .placeholder {
+        padding-bottom: 3rem;
+    }
 }
 
 /*
@@ -77,6 +193,15 @@ th {
     border-bottom: 1px solid #ddd;
 }
 
+.owner-table {
+    margin-top: 2rem;
+}
+
+.td-more-info {
+    padding-top: 20px !important;
+    text-align: center;
+}
+
 
 
 /*
@@ -103,87 +228,7 @@ Pager
     }
 }
 
-/*
-column
- */
-/*.column {*/
-    /*margin-bottom: 3rem;*/
-/*}*/
 
-/*
-Container
- */
-.row {
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-bottom: 3rem;
-}
-
-.button-row {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
-}
-
-.card {
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .75rem;
-    margin-bottom: 3rem;
-}
-
-.card-block {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 2rem;
-}
-
-h2.card-title {
-    margin-top: .75rem;
-    margin-bottom: 3rem;
-}
-
-h3.card-title {
-    margin-top: .75rem;
-    margin-bottom: 3rem;
-}
-
-.card-subtitle {
-    margin-top: -.375rem;
-}
-
-.card-link+.card-link {
-    margin-left: 1.25rem;
-}
-
-.card-text {
-    font-size: 17px;
-    margin: 0 0 2rem;
-}
-
-.card-inner {
-    padding-left: 0;
-}
-
-.summary {
-    padding-top: 1rem;
-}
-
-.vertical-align {
-    display: flex;
-    align-items: center;
-}
 
 /*
 Button
@@ -232,6 +277,10 @@ octicon
 /*
 image
  */
-.img-thumbnail {
-    max-width: 200px;
+
+
+@media only screen  and (min-width : 480px) {
+    .img-thumbnail {
+        max-width: 200px;
+    }
 }
